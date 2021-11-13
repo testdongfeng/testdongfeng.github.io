@@ -14,6 +14,9 @@ Since then, many following works, for example, [Molchanov, P., et al.](#Molchano
 Before we dive into the alternatives of finetuning, we would like to first talk about the lottery ticket hypothesis ([Frankle, Jonathan, and Michael Carbin.](#Frankle)). The lottery ticket hypothesis claims that a random initialized neural network contains a sparse subnet which can be trained from scratch to reach test accruacy simliar to the full network. The way to identify this sub-net is quite simliar to the pruning pipeline. A model is trained and pruned. However, then the surviving weights are rewound to their initilazation to get the winning ticket. Then this subnet can be trained to verify the hypothesis.
 ## References
 <a name="Renda">Renda, Alex, Jonathan Frankle, and Michael Carbin. "Comparing Rewinding and Fine-tuning in Neural Network Pruning." International Conference on Learning Representations. 2019.</a>
+
 <a name="Han">Han, Song, et al. "Learning both Weights and Connections for Efficient Neural Network." Advances in Neural Information Processing Systems 28 (2015).</a>
+
 <a name="Molchanov">Molchanov, P., et al. "Pruning convolutional neural networks for resource efficient inference." 5th International Conference on Learning Representations, ICLR 2017-Conference Track Proceedings. 2019.</a>
+
 <a name="Frankle">Frankle, Jonathan, and Michael Carbin. "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks." International Conference on Learning Representations. 2018.</a>
