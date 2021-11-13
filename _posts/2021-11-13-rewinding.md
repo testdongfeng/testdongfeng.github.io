@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Lottery Ticket Hypothesis and It’s Application on Model Pruning
+title: Rewinding as an Alternative to Finetuning for Network Pruning
 tags: []
 authors: Shuqin Xie, Dongfeng Yu
 ---
