@@ -20,6 +20,12 @@ We of course also care about sparsity and the tradeoff between it and the accura
 Many previous works, such as [He, Yihui, Xiangyu Zhang, and Jian Sun.](#He) explore the methods for structured pruning. The rewinding methods that we will talk about below can be applied to both kinds of pruning.
 ## The Lottery Ticket Hypothesis
 As we have mentioned, this paper provides alteratives to finetuning, but before we dive into them, we would like to first talk about the lottery ticket hypothesis ([Frankle, Jonathan, and Michael Carbin.](#Frankle)), which is the motivation behind these alternatives. The lottery ticket hypothesis claims that a random initialized neural network contains a sparse subnet which can be trained from scratch to reach test accruacy simliar to the full network. The way to identify this subnet is quite simliar to the pruning pipeline. A model is trained and pruned. However, then the surviving weights are rewound to their initialization to get the winning ticket. Then this subnet can be trained to verify the hypothesis.
+## Weight Rewinding
+WIP
+## Learning Rate Rewinding
+WIP
+## Reflections
+WIP
 ## References
 <a name="Renda">Renda, Alex, Jonathan Frankle, and Michael Carbin. "Comparing Rewinding and Fine-tuning in Neural Network Pruning." International Conference on Learning Representations. 2019.</a>
 
