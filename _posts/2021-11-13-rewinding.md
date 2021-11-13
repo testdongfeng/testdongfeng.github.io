@@ -18,7 +18,7 @@ Accuracy is of course the metric that we care about. Ideally, we expect the prun
 We of course also care about sparsity and the tradeoff between it and the accuracy. However, sparsity is a vaguely defined term. We can surely define it as the number of zeros in the weights. However, it is not just how many zeros that matters but also the structure of the zeros. A simple example would be, if we can prune several channels away from a CNN, then the acceleration and memory reduce is immediately gained without any hardware or software support. However, if we zero out random entries across all channels and reach the same sparsity, we may not get any advantage over an unpruned model. Specially designed hardware and software ([Han, Song, et al.](#Song)) may be required for these sparse convolution kernels. Below is a visualization showing the two kinds of sparsity:
 ![Sparsity]({{site.url}}/public/images/sparsity.jpg)
 Many previous works, such as [He, Yihui, Xiangyu Zhang, and Jian Sun.](#He) explore the methods for structured pruning. The rewinding methods that we will talk about below can be applied to both kinds of pruning.
-### Efficienty
+### Efficiency
 We can also directly evaluate the pruned models based on their inference speed and memory consumption. But of course this is highly dependent on the hardware used, which also implies there may not be a silver bullet. Instead, use the right pruning algorithm for your specific platform of computation.
 ### Search Cost
 We also care about the resources needed to create the pruned model. This is not as important as the previous metrics in a real-world setting, but again we may sometimes need to maintain a reasonable cost.
