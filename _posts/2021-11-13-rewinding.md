@@ -5,7 +5,7 @@ tags: []
 authors: Shuqin Xie, Dongfeng Yu
 ---
 ## Introducation
-This blog post is about our thoughts on the topics mentioned by the ICLR paper [Comparing Rewinding and Fine-tuning in Neural Network Pruning](#Renda), which we ill be refering to as "this paper". We hope you enjoy reading our article.
+This blog post is about our thoughts on the topics mentioned by the ICLR paper [Comparing Rewinding and Fine-tuning in Neural Network Pruning](#Renda), which we will be refering to as "this paper". We hope you enjoy reading our article.
 ## Network Pruning
 The efficiency of neural network inference is of importance for both the research community and industry since it's critical for the real-world applications of deep learning. Network pruning is an active research field involving various ways to reduce the size of a given model, for the benefit of memory consumption and computation cost. One of the early works ([Han, Song, et al.](#Han)) considers a simple yet effective way to prune an already trained neural network: Set all the weights whose magnitude is under a certain threshold to zero and fine-tune the resulting network. Intuitively, the weights that are close to zero have less impact on the overall performance of the network, thus removing them would only cause a small drop in accuracy, which will them be remedied with fine tuning. It is also showed that doing this pruning step for multiple times instead of pruning directly to the desired sparsity can increase the resulting accuracy as well. So in summary, a typical pruning pipeline would look like:
 ![Pipeline]({{site.url}}/public/images/pipeline.jpg)
@@ -23,13 +23,15 @@ We can also directly evaluate the pruned models based on their inference speed a
 ### Search Cost
 We also care about the resources needed to create the pruned model. This is not as important as the previous metrics in a real-world setting, but again we may sometimes need to maintain a reasonable cost.
 ## The Lottery Ticket Hypothesis
-As we have mentioned, this paper provides alteratives to finetuning, but before we dive into them, we would like to first talk about the lottery ticket hypothesis ([Frankle, Jonathan, and Michael Carbin.](#Frankle)), which is the motivation behind these alternatives. The lottery ticket hypothesis claims that a random initialized neural network contains a sparse subnet which can be trained from scratch to reach test accruacy simliar to the full network. The way to identify this subnet is quite simliar to the pruning pipeline. A model is trained and pruned. However, then the surviving weights are rewound to their initialization to get the winning ticket. Then this subnet can be trained to verify the hypothesis.
+As we have mentioned, this paper provides alteratives to finetuning, but before we dive into them, we would like to first talk about the lottery ticket hypothesis ([Frankle, Jonathan, and Michael Carbin.](#Frankle)), which is the motivation behind these alternatives. The lottery ticket hypothesis claims that a random initialized neural network contains a sparse subnet which can be trained from scratch to reach test accruacy simliar to the full network in less iteration. And the standard pruning pipeline can be used to identify this subnet. A model is trained and pruned. However, then the surviving weights are rewound to their initialization to get the winning ticket. Then this subnet can be trained to verify the hypothesis.
+## Finetuning
+Finetuning is a commonly used technique in transfer learning to adapt pretrained model to the new data domain. In pruning community, it is first used by ([Han, Song, et al.](#Han)) and later become a paradigm in this domain. After pruning, we usually retrain the pruned network for t epochs with the last epoch's learning rate to uncover the loss of accuracy. 
 ## Weight Rewinding
-WIP
+In the lottery ticket hypothesis paper, the authors discussed, without verification, the possibility of a new retraining technique other than finetuning. It is termed weight rewinding and is intended to replace finetuning after pruning. The idea is quite simple: instead of using the final trained weight, it rewinds unpruned weights and learning rate scheduler to t epochs before, then retrain the pruned network for t epochs. Note that the original paper only proposed this possibility without validating it. This paper verified this idea and proved that it is in general in par or better than finetuning. 
 ## Learning Rate Rewinding
-WIP
+This paper further proposed a learning rate rewinding technique, that is, retrain using the final weight but rewind learning rate schedule to t epochs before. It is in the middle of finetuning and weight rewinding, where finetuning uses the final weight and final learning rate, while weight rewinding reuses previous weights and previous learning rate scheduler. Their experiments show that learning rate rewinding is in general better than weight rewinding. 
 ## Reflections
-WIP
+This paper breaks the "common knowledge" that we only uses the latest learning rate during finetuning. It is quite common that people simply follows existing "common knowledge" without thinking whether it is necessary or is there better choice. This paper shows that we don't need to blindly use finetuning, there exists simple and better solutions called learning rate rewinding. 
 ## References
 <a name="Renda">Renda, Alex, Jonathan Frankle, and Michael Carbin. "Comparing Rewinding and Fine-tuning in Neural Network Pruning." International Conference on Learning Representations. 2019.</a>
 
